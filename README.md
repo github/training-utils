@@ -1,6 +1,6 @@
 # Training::Utils
 
-This collection of utilities originated [here](https://github.com/matthewmccullough/scripts). This gem packages the git- and training-specific scripts into an easily-installed package.
+This collection of utilities originated [here](https://github.com/matthewmccullough/scripts). This packages the git- and training-specific scripts into an easily-installed package.
 
 ## Installation
 
