@@ -1,6 +1,6 @@
 # Training::Utils
 
-This collection of utilities originated [here](https://github.com/matthewmccullough/scripts). This packages the git- and training-specific scripts into an easily-installed package.
+This is a package of git- and github-training scripts into an easily-installed package. This collection of utilities originated [here](https://github.com/matthewmccullough/scripts).
 
 ## Installation
 
@@ -89,7 +89,7 @@ I'm Instructor Name Here, your instructor
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/git-training-utils/fork )
+1. Fork it ( https://github.com/githubtraining/training-utils/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
