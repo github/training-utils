@@ -9,7 +9,8 @@ task :install do
 
   scripts.each do |f|
     puts "  Linking #{target}/#{f}"
-    FileUtils.symlink f, File.expand_path(target)
+    path_to_target = File.expand_path(target)
+    FileUtils.symlink File.absolute_path(f), path_to_target
   end
 end
 
