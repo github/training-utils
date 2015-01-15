@@ -1,8 +1,17 @@
 #!/bin/sh
 
+answer=$@
+#Ask for instructor unless specified
+if [ -z "$1" ];
+  then
+  printf "Instructor name? "
+  read answer
+fi
+
+clear
+
 echo '-------------------------------------------------'
 echo 'Welcome to class on:' `date`
-echo "I'm Matthew McCullough, your instructor "
+echo "I'm ${answer}, your instructor "
 echo '-------------------------------------------------'
 echo
-
