@@ -7,13 +7,13 @@ task :install do
   target  = ENV["TARGET"] || ask_for_target_dir
   File.directory?(File.expand_path(target)) or abort("Install directory isn't a directory")
 
-  scripts.each do |f|
-    puts "  Linking #{target}/#{f}"
-    path_to_target = File.expand_path(target)
+  scripts.each do |filename|
+    puts "  Linking #{target}/#{filename}"
+    path_to_target = File.join File.expand_path(target), filename
     if File.exist?(path_to_target) && File.symlink?(path_to_target)
       FileUtils.rm(path_to_target)
     end
-    FileUtils.symlink File.absolute_path(f), path_to_target
+    FileUtils.symlink File.absolute_path(filename), path_to_target
   end
 end
 
