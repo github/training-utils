@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Update Macports
-sudo port selfupdate
-
-# Update outdated packages
-sudo port upgrade outdated

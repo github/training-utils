@@ -1,3 +1,0 @@
-#!/bin/bash
-echo Searching for \"$1\" in gradle files.
-ack -a "$1" **/*.gradle

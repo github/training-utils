@@ -1,2 +1,0 @@
-#!/bin/sh
-[ $# -eq 7 ] && /usr/local/bin/p4merge "$2" "$5"

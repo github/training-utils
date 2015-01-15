@@ -1,3 +1,0 @@
-#!/bin/bash
-echo Starting VMWare Fusion services...
-sudo '/Library/Application Support/VMware Fusion/boot.sh' --start
