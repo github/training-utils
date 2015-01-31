@@ -14,7 +14,7 @@ $ rake
 
 #### `generaterandomchanges <N> <base> <extension>`
 
-Generates **N** new **commits**, the content of each is a new file named "<base><I>.<extension>" with some random text.
+Generates **N** new **commits**, the content of each is a new file named "`<base><I>.<extension>`" with some random text.
 
 ```
 $ generaterandomchanges 3 file txt
@@ -40,7 +40,7 @@ ec9bce1 Add readme
 
 #### `generaterandomfiles <N> <base> <extension>`
 
-Generates **N** new **files**, each named "<base><I>.<extension>" with some random text.
+Generates **N** new **files**, each named "`<base><I>.<extension>`" with some random text.
 
 ```
 $ generaterandomfiles 3 stuff txt
