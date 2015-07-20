@@ -1,10 +1,9 @@
-# add-collaborators.rb
+#!/usr/bin/env ruby
 # add as collaborators anyone who comments on a given issue in a given repo
 # assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUBTEACHER_TOKEN
 
 require 'octokit'
 require 'optparse'
-
 
 # Make sure arguments are specified
 ARGV << '-h' if ARGV.empty?
@@ -37,14 +36,15 @@ puts options
 
 
 # Assign variables
-token = 'GITHUBTEACHER_TOKEN'
 repo_name = options[:repo]
 issue_num = options[:issue]
 
+TOKEN = ENV['GITHUBTEACHER_TOKEN']
+abort("Requires GITHUBTEACHER_TOKEN!") unless TOKEN
 
 # Create a new Octokit Client
 Octokit.auto_paginate = true
-client = Octokit::Client.new :access_token => ENV[token]
+client = Octokit::Client.new :access_token => TOKEN
 
 
 # Get Issue Commenters and Add as Collaborators
