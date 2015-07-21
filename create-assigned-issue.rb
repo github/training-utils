@@ -15,7 +15,7 @@ file      = __FILE__
 issue_url = ARGV.first
 token     = ENV['TOKEN']
 
-abort banner unless issue_url || issue_url == '-h'
+abort banner if !issue_url || issue_url == '-h'
 
 REGEX = %r{github\.com/([^/]+/[^/]+)/issues/(\d+)}
 # https://github.com/username/reponame/issues/2
