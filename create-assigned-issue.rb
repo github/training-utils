@@ -28,7 +28,7 @@ end
 
 Octokit.auto_paginate = true
 
-client       = Octokit::Client.new :access_token => ENV['TOKEN']
+client       = Octokit::Client.new :access_token => ENV['GITHUBTEACHER_TOKEN']
 repo, number = parse_issue_url(issue_url)
 issue        = client.issue(repo, number)
 assigned     = issue.assignee.login
