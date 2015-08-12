@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 banner = <<-BANNER
-Usage: create-assigned-issue.rb <issue URL>
+Usage: create-assigned-issue <issue URL>
   * Copies issue as template
   * Replaces any references to the assigned user (eg, at-mentions, etc.)
   * Also "undoes" any checkboxes in issue template (eg, [x] -> [ ])
