@@ -1,51 +1,42 @@
 #!/usr/bin/env ruby
+banner = <<-BANNER
+Usage: add-collaborators [<issue URL> or options]
+BANNER
+
 # add as collaborators anyone who comments on a given issue in a given repo
-# assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUBTEACHER_TOKEN
+# assumes you store the appropriate OAuth token as an ENV variable called GITHUBTEACHER_TOKEN
 
 require 'octokit'
 require 'optparse'
+require './common'
+
+access_token = ENV['GITHUBTEACHER_TOKEN'] or abort("You need a GitHub Teacher access token")
+repo_name, issue_num = nil, nil
 
 # Make sure arguments are specified
 ARGV << '-h' if ARGV.empty?
 
+ARGV.options do |opts|
+  opts.banner = banner
+  opts.on("-r", "--repo REPOSITORY", String) { |val| repo_name = val }
+  opts.on("-i", "--issue ISSUE", Numeric)    { |val| issue_num = val }
+  opts.on_tail("-h", "--help")               { abort opts.to_s }
+  opts.parse!
+end
 
-# Create options hash
-options = {}
+if ARGV.any?
+  r, i = parse_issue_url(ARGV.first)
+  repo_name ||= r
+  issue_num ||= i
+end
 
+abort ARGV.options.to_s unless [repo_name, issue_num].all?
 
-# Parse options
-OptionParser.new do |opts|
-  opts.banner = "Usage: add-collaborators.rb [options]"
-
-  opts.on("-r", "--repo REPOSITORY", "Repository Path -- ex: githubteacher/example-repo") do |r|
-    options[:repo] = r
-  end
-
-  opts.on("-i", "--issue ISSUE", Numeric, "Issue Number -- ex: 4") do |i|
-    options[:issue] = i
-  end
-
-  opts.on_tail("-h", "--help", "Prints this help message") do |h|
-    puts opts
-    exit
-  end
-
-end.parse!
-
-puts options
-
-
-# Assign variables
-repo_name = options[:repo]
-issue_num = options[:issue]
-
-TOKEN = ENV['GITHUBTEACHER_TOKEN']
-abort("Requires GITHUBTEACHER_TOKEN!") unless TOKEN
+puts({repo_name: repo_name, issue_num: issue_num}.inspect)
 
 # Create a new Octokit Client
 Octokit.auto_paginate = true
-client = Octokit::Client.new :access_token => TOKEN
-
+client = Octokit::Client.new :access_token => access_token
 
 # Get Issue Commenters and Add as Collaborators
 begin
