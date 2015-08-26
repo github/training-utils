@@ -8,7 +8,7 @@ BANNER
 
 require 'octokit'
 require 'optparse'
-require './common'
+require_relative 'common'
 
 access_token = ENV['GITHUBTEACHER_TOKEN'] or abort("You need a GitHub Teacher access token")
 repo_name, issue_num = nil, nil

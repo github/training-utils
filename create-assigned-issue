@@ -10,7 +10,7 @@ BANNER
 $stderr.sync = true
 require 'octokit'
 require 'optparse'
-require './common'
+require_relative 'common'
 
 file      = __FILE__
 issue_url = ARGV.first
