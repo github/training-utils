@@ -44,19 +44,29 @@ current_collaborators = Hash[client.collaborators(repo_name).map { |collaborator
 }]
 
 # Get Issue Commenters and Add as Collaborators
+successfully_added_users = []
 begin
   client.issue_comments(repo_name, issue_num).each do |comment|
     username = comment[:user][:login]
     next if current_collaborators[username] # skip adding if already a collaborator
-    user_added = client.add_collaborator(repo_name, username)
-    if !user_added
-      puts "Failed to add #{username} as a collaborator"
+    if user_added = client.add_collaborator(repo_name, username)
+      successfully_added_users << username
+    else
+      puts "Failed to add #{username} as a collaborator (check: is githubteacher repository owner?)"
     end
   end
 rescue Octokit::NotFound
   puts "[404] - Repository not found:\nIf #{repo_name || "nil"} is correct, are you using the right Auth token?"
-
 rescue Octokit::UnprocessableEntity
   puts "[422] - Unprocessable Entity:\nAre you trying to add collaborators to an org-level repository?"
+end
 
+if successfully_added_users.any?
+  begin
+    verb = successfully_added_users.size == 1 ? "is" : "are"
+    message = ":tada: #{successfully_added_users.map { |name| "@#{name}" }.join(" ")} #{verb} now repository collaborator#{successfully_added_users.size == 1 ? '' : 's'} :balloon:"
+    client.add_comment repo_name, issue_num, message
+  rescue => e
+    abort "ERR posting comment (#{e.inspect})"
+  end
 end
