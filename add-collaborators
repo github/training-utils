@@ -63,8 +63,25 @@ end
 
 if successfully_added_users.any?
   begin
-    verb = successfully_added_users.size == 1 ? "is" : "are"
-    message = ":tada: #{successfully_added_users.map { |name| "@#{name}" }.join(" ")} #{verb} now repository collaborator#{successfully_added_users.size == 1 ? '' : 's'} :balloon:"
+    names = "@#{successfully_added_users.first}"
+    verb  = "is"
+    num   = "a"
+    noun  = "collaborator"
+    
+    if successfully_added_users.size > 1
+      verb  = "are"
+      num   = ""
+      noun  = "collaborators"
+      
+      if successfully_added_users.size == 2
+        names = "@#{successfully_added_users.first} and @#{successfully_added_users.last}"
+      else
+        at_mentions = successfully_added_users.map { |name| "@#{name}" }
+        names = "#{at_mentions[0...-1].join(", ")}, and #{at_mentions[-1]}"
+      end
+    end
+    
+    message = ":tada: #{names} #{verb} now #{num} repository #{noun}. :balloon:"
     client.add_comment repo_name, issue_num, message
   rescue => e
     abort "ERR posting comment (#{e.inspect})"
