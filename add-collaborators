@@ -56,9 +56,9 @@ begin
     end
   end
 rescue Octokit::NotFound
-  puts "[404] - Repository not found:\nIf #{repo_name || "nil"} is correct, are you using the right Auth token?"
+  abort "[404] - Repository not found:\nIf #{repo_name || "nil"} is correct, are you using the right Auth token?"
 rescue Octokit::UnprocessableEntity
-  puts "[422] - Unprocessable Entity:\nAre you trying to add collaborators to an org-level repository?"
+  abort "[422] - Unprocessable Entity:\nAre you trying to add collaborators to an org-level repository?"
 end
 
 if successfully_added_users.any?
