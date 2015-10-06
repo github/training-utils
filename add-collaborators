@@ -38,10 +38,16 @@ puts({repo_name: repo_name, issue_num: issue_num}.inspect)
 Octokit.auto_paginate = true
 client = Octokit::Client.new :access_token => access_token
 
+# Save a little time - build a hash of current collaborators so we can skip them later
+current_collaborators = Hash[client.collaborators(repo_name).map { |collaborator|
+  [collaborator[:login], collaborator[:login]]
+}]
+
 # Get Issue Commenters and Add as Collaborators
 begin
   client.issue_comments(repo_name, issue_num).each do |comment|
     username = comment[:user][:login]
+    next if current_collaborators[username] # skip adding if already a collaborator
     user_added = client.add_collaborator(repo_name, username)
     if !user_added
       puts "Failed to add #{username} as a collaborator"
