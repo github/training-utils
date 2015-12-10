@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require_relative 'training-class'
+
+tc = TrainingClass.new('acme', 'developers')
+tc.create_repo
+tc.set_up_team
+tc.add_students_to_team ['githubstudent']
