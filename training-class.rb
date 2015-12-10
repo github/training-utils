@@ -17,8 +17,11 @@ class TrainingClass
 
   def create_repo
     repo_name = @customer + '-' + Date.today.to_s + '-' + @class_name
-    @repo = @client.repository(@@org + '/' + repo_name)
-    if !@repo
+    repo_full_name = @@org + '/' + repo_name
+    if @client.repository?(repo_full_name)
+      puts "A repo named #{repo_full_name} already exists!"
+      @repo = @client.repository(repo_full_name)
+    else
        @repo = @client.create_repository(repo_name,
         :organization => @@org,
         :has_issues => true,
@@ -29,12 +32,21 @@ class TrainingClass
 
   def set_up_team
     team_name = 'team-' + @repo['name']
-    @team = @client.create_team(@@org,
-      :name => team_name) unless @client.org_teams(@@org).include?(team_name)
-    repo_added_to_team = @client.add_team_repo(@team['id'],
+    org_teams = @client.org_teams(@@org).freeze
+    team_index = org_teams.index { |team| team['name'] == team_name }
+    if team_index
+      puts "A team named #{team_name} already exists!"
+      @team = org_teams[team_index]
+    else
+      @team = @client.create_team(@@org,
+        :name => team_name)
+    end
+    if !@client.add_team_repo(@team['id'],
       @repo['full_name'],
       :permission => 'push',
       :accept => 'application/vnd.github.ironman-preview+json')
+        puts "Failed to give #{team_name} access to #{@repo['full_name']}!"
+    end
   end
 
   def add_students_to_team(students)
