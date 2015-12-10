@@ -15,8 +15,8 @@ class TrainingClass
     @client = Octokit::Client.new :access_token => access_token
   end
 
-  def create_repo
-    repo_name = @customer + '-' + Date.today.to_s + '-' + @class_name
+  def create_repo(repo_name = nil)
+    repo_name ||= @customer + '-' + Date.today.to_s + '-' + @class_name
     repo_full_name = @@org + '/' + repo_name
     if @client.repository?(repo_full_name)
       puts "A repo named #{repo_full_name} already exists!"
@@ -30,8 +30,8 @@ class TrainingClass
      end
   end
 
-  def set_up_team
-    team_name = 'team-' + @repo['name']
+  def set_up_team(team_name = nil)
+    team_name ||= 'team-' + @repo['name']
     org_teams = @client.org_teams(@@org).freeze
     team_index = org_teams.index { |team| team['name'] == team_name }
     if team_index
@@ -49,7 +49,7 @@ class TrainingClass
     end
   end
 
-  def add_students_to_team(students)
+  def add_students_to_team(students = [])
     students << 'githubteacher'
     students.each do |student|
       @client.add_team_membership(@team['id'],
