@@ -4,10 +4,10 @@ This is a package of git- and github-training scripts into an easily-installed p
 
 ## Installation
 
-If you have Ruby installed, you can install these scripts into a directory in your path by running:
+If you have Ruby >= 1.9 installed, you can install these scripts into a directory in your `$PATH` by running:
 
 ```
-$ rake
+$ script/bootstrap
 ```
 
 ## Usage
