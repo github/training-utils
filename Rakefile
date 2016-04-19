@@ -3,7 +3,7 @@ require 'fileutils'
 task default: :install
 
 task :install do
-  scripts = Dir['*'] - %w{LICENSE.txt Rakefile README.md}
+  scripts = Dir['*'] - %w{script vendor common.rb Gemfile Gemfile.lock LICENSE.txt Rakefile README.md}
   target  = ENV["TARGET"] || ask_for_target_dir
   File.directory?(File.expand_path(target)) or abort("Install directory isn't a directory")
 
