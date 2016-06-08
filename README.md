@@ -72,6 +72,10 @@ $ git graphlive 5
 
 Perpetually loop through `history`. It's like `tail -f` for history. Comes in `bash` and `zsh` flavors. It's sometimes useful to have this on a split screen, showing the recent history of commands.
 
+#### `transpose <file>.csv`
+
+Generate a transposed `*.csv` file from an input file.
+
 #### `treelive <depth>`
 
 Perpetually loop `tree`, up to `depth` folders deep in the hierarchy.
