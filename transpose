@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# Usage:
+#   transpose <file>.csv
+
+# use the right `transpose-csv.rb`
+if test ! $(which transpose); then
+  # local
+  _transpose="./transpose-csv.rb"
+else
+  # symlink, after running `script/bootstrap`
+  _transpose="$(which transpose)-csv.rb"
+fi
+
+_inputfile=${1}
+_extension="${_inputfile##*.}"
+
+if [ "${_extension}" != "csv" ]; then
+  echo "ERROR: '${_inputfile}' it not a '*.csv' file"
+  exit 1
+fi
+
+if [ ! -f "${_inputfile}" ]; then
+  echo "ERROR: '${_inputfile}' not found"
+  exit 1
+fi
+
+_outputfile="${_inputfile%%.*}-transposed.csv"
+# _outputfile="${_inputfile%%.*}-`date +%Y-%m-%d`.csv"
+
+cat "${_inputfile}" | "${_transpose}" > "${_outputfile}"
+
+echo "SUCCESS: '${_outputfile}' created"
+exit 0
