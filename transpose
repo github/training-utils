@@ -19,7 +19,7 @@ fi
 _outputfile="${_inputfile%%.*}-transposed.csv"
 # _outputfile="${_inputfile%%.*}-`date +%Y-%m-%d`.csv"
 
-cat "${_inputfile}" | ./lib/transpose-csv.rb > "${_outputfile}"
+cat "${_inputfile}" | ./transpose-csv.rb > "${_outputfile}"
 
 echo "SUCCESS: '${_outputfile}' created"
 exit 0
