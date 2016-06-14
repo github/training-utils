@@ -1,8 +1,18 @@
 #!/usr/bin/env ruby
 require 'CSV'
 
-file = File.open(ARGV[0], "r:ISO-8859-1:ISO-8859-1")
+def get_dest(src)
+    dest = src.split('.')
+    dest[0] += '-transposed'
+    dest.join('.')
+end
+
+src = ARGV[0]
+file = File.open(src, "r:ISO-8859-1")
 rows = CSV.parse(file)
 
-# Via https://stackoverflow.com/questions/29521170/ruby-transpose-csv
-puts rows.transpose.map { |x| x.join ',' }
+CSV.open(get_dest(src), "wb") do |csv|
+    rows.transpose.each do |row|
+        csv << row
+    end
+end

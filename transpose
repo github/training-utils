@@ -28,7 +28,7 @@ fi
 _outputfile="${_inputfile%%.*}-transposed.csv"
 # _outputfile="${_inputfile%%.*}-`date +%Y-%m-%d`.csv"
 
-"${_transpose}" "${_inputfile}" > "${_outputfile}"
+"${_transpose}" "${_inputfile}"
 
 echo "SUCCESS: '${_outputfile}' created"
 exit 0
