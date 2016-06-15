@@ -102,6 +102,11 @@ When training, we use lots of other app. Here are some of our favorites:
 - [Switch ResX](http://www.madrau.com/)
 - [Shush](https://itunes.apple.com/us/app/shush-microphone-manager/id496437906?mt=12)
 - [AirSketch](http://www.qrayon.com/home/airsketch/)
+- [A Web Whiteboard](https://awwapp.com/)
+- [Duet Display](http://www.duetdisplay.com/)
+- [Slate](https://github.com/jigish/slate) (looks like it stopped getting commits in 2013, but I still use it
+- [Divvy](http://mizage.com/divvy/)
+- [Better Snap Tool](https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12)
 
 ## Contributing
 
