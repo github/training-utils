@@ -93,7 +93,7 @@ I'm Instructor Name Here, your instructor
 
 ## Other Useful Apps
 
-When training, we use lots of other app. Here are some of our favorites: 
+When training, we use lots of other apps. Here are some of our favorites: 
 - [Caffeine](https://itunes.apple.com/us/app/caffeine/id411246225)
 - [Mouseposé](https://itunes.apple.com/app/mousepose/id405904955?mt=12)
 - [ScreenFlow](http://www.telestream.net/screenflow/overview.htm) for recording screen casts
