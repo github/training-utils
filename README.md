@@ -91,6 +91,23 @@ I'm Instructor Name Here, your instructor
 -------------------------------------------------
 ```
 
+## Other Useful Apps
+
+When training, we use lots of other apps. Here are some of our favorites: 
+- [Caffeine](https://itunes.apple.com/us/app/caffeine/id411246225)
+- [Mouseposé](https://itunes.apple.com/app/mousepose/id405904955?mt=12)
+- [ScreenFlow](http://www.telestream.net/screenflow/overview.htm) for recording screen casts
+- Skitch classic for Mac OSX (hard DMG to find nowadays)
+- [Quickres](http://www.quickresapp.com/)
+- [Switch ResX](http://www.madrau.com/)
+- [Shush](https://itunes.apple.com/us/app/shush-microphone-manager/id496437906?mt=12)
+- [AirSketch](http://www.qrayon.com/home/airsketch/)
+- [A Web Whiteboard](https://awwapp.com/)
+- [Duet Display](http://www.duetdisplay.com/)
+- [Slate](https://github.com/jigish/slate) (looks like it stopped getting commits in 2013, but I still use it
+- [Divvy](http://mizage.com/divvy/)
+- [Better Snap Tool](https://itunes.apple.com/us/app/bettersnaptool/id417375580?mt=12)
+
 ## Contributing
 
 1. Fork it ( https://github.com/githubtraining/training-utils/fork )
