@@ -110,7 +110,7 @@ When training, we use lots of other apps. Here are some of our favorites:
 
 ## Contributing
 
-1. Fork it ( https://github.com/githubtraining/training-utils/fork )
+1. Fork it ( https://github.com/github/training-utils/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
