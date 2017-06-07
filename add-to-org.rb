@@ -13,7 +13,7 @@ options = {}
 
 # Parse options
 OptionParser.new do |opts|
-  opts.banner = "Usage: add-collaborators.rb [options]"
+  opts.banner = "Usage: add-to-org.rb [options]"
 
   opts.on("-u", "--username USERNAME", "Username for membership -- ex: githubstudent") do |i|
     options[:issue] = u
