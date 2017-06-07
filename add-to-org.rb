@@ -63,6 +63,7 @@ def add_to_team_and_org(team_name, username, org)
       team_id = team.id
     end
   end
+end
 
   if team_id.nil?
     # TODO: what ways can this fail that we need to rescue for?
@@ -71,13 +72,14 @@ def add_to_team_and_org(team_name, username, org)
     puts "Team '#{team_name}' created at https://github.com/orgs/#{org}/teams" unless team_id.nil?
   end
 
-  # Add username to team_id
-    @client.add_team_membership(team_id, username)
-    puts "#{username} added to #{team_name}."
+end
+# If they just want to add users as members, skip the team
+def add_to_org(org, username)
+  @client.update_organization_membership(org, {:user => username})
 end
 
 if !team_name.nil?
   add_to_team_and_org(team_name, username, org)
 else
-  #add_to_org(username, org)
+  add_to_org(org, username)
 end
