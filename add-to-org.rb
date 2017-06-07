@@ -35,7 +35,7 @@ OptionParser.new do |opts|
 end.parse!
 
 
-TOKEN = ENV['GITHUBUSER_TOKEN']
+TOKEN = ENV['GITHUBTEACHER_TOKEN']
 abort("\nMissing GITHUBUSER_TOKEN. Please set up an OAUTH token at ") unless TOKEN
 
 # Assign variables
@@ -55,9 +55,8 @@ Octokit.auto_paginate = true
 #  regardless of them being a member of the organization yet
 def add_to_team_and_org(team_name, username, org)
 
-  team_id = nil
-  team_id = get_team_id(team_name)
-  create_team(org, team_name) unless team_id.nil?
+  team_id = get_team_id(team_name, org)
+  create_team(org, team_name, org) unless !team_id.nil?
 
   # Add username to team_id
   # Slightly different than adding them as a member.
@@ -76,6 +75,7 @@ def create_team(team_id, team_name, org)
 end
 
 def get_team_id(team_name, org)
+  team_id = nil
   team_list = @client.org_teams(org)
 
   team_list.each do |team|
