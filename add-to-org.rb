@@ -42,4 +42,15 @@ abort("\nMissing GITHUBUSER_TOKEN. Please set up an OAUTH token at ") unless TOK
 #  Team is optional, so you don't need to assign it if it's nil.
 username = options[:username]
 org = options[:org]
-team = options[:team] if !options[:team].nil?
+teamname = options[:team] if !options[:team].nil?
+
+# Create a new Octokit Client
+Octokit.auto_paginate = true
+client = Octokit::Client.new :access_token => TOKEN
+
+if !team.nil?
+  add_to_team_and_org(teamname, username, org)
+else
+  #add_to_org(username, org)
+end
+
