@@ -47,11 +47,37 @@ team_name = options[:team] if !options[:team].nil?
 
 # Create a new Octokit Client
 Octokit.auto_paginate = true
-client = Octokit::Client.new :access_token => TOKEN
+@client = Octokit::Client.new :access_token => TOKEN
+
+# If the team doesn't exist yet, create it
+#  otherwise, get the team_id from the list
+# Once we have the team_id we can add people to it
+#  regardless of them being a member of the organization yet
+def add_to_team_and_org(team_name, username, org)
+
+  team_id = nil
+  team_list = @client.org_teams(org)
+
+  team_list.each do |team|
+    if team.name == team_name
+      team_id = team.id
+    end
+  end
+
+  if team_id.nil?
+    # TODO: what ways can this fail that we need to rescue for?
+    response = @client.create_team(org, {:name => team_name})
+    team_id = response.id
+    puts "Team '#{team_name}' created at https://github.com/orgs/#{org}/teams" unless team_id.nil?
+  end
+
+  # Add username to team_id
+    @client.add_team_membership(team_id, username)
+    puts "#{username} added to #{team_name}."
+end
 
 if !team_name.nil?
   add_to_team_and_org(team_name, username, org)
 else
   #add_to_org(username, org)
 end
-
