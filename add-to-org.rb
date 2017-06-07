@@ -56,6 +56,26 @@ Octokit.auto_paginate = true
 def add_to_team_and_org(team_name, username, org)
 
   team_id = nil
+  team_id = get_team_id(team_name)
+  create_team(org, team_name) unless team_id.nil?
+
+  # Add username to team_id
+  # Slightly different than adding them as a member.
+  @client.add_team_membership(team_id, username)
+  puts "#{username} added to #{team_name}."
+end
+
+# Returns team_id
+def create_team(team_id, team_name, org)
+  # TODO: what ways can this fail that we need to rescue for?
+  response = @client.create_team(org, {:name => team_name})
+  team_id = response.id
+  puts "Team '#{team_name}' created at https://github.com/orgs/#{org}/teams" unless team_id.nil?
+
+  team_id
+end
+
+def get_team_id(team_name, org)
   team_list = @client.org_teams(org)
 
   team_list.each do |team|
@@ -63,16 +83,10 @@ def add_to_team_and_org(team_name, username, org)
       team_id = team.id
     end
   end
-end
-
-  if team_id.nil?
-    # TODO: what ways can this fail that we need to rescue for?
-    response = @client.create_team(org, {:name => team_name})
-    team_id = response.id
-    puts "Team '#{team_name}' created at https://github.com/orgs/#{org}/teams" unless team_id.nil?
-  end
+  team_id
 
 end
+
 # If they just want to add users as members, skip the team
 def add_to_org(org, username)
   @client.update_organization_membership(org, {:user => username})
