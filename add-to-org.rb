@@ -34,4 +34,8 @@ OptionParser.new do |opts|
 
 end.parse!
 
-puts options
+# Assign variables
+#  Team is optional, so you don't need to assign it if it's nil.
+username = options[:username]
+org = options[:org]
+team = options[:team] if !options[:team].nil?
