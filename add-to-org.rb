@@ -36,8 +36,7 @@ end.parse!
 
 
 TOKEN = ENV['GITHUBUSER_TOKEN']
-abort("Requires GITHUBUSER_TOKEN!") unless TOKEN
-
+abort("\nMissing GITHUBUSER_TOKEN. Please set up an OAUTH token at ") unless TOKEN
 
 # Assign variables
 #  Team is optional, so you don't need to assign it if it's nil.
