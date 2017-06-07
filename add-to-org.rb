@@ -60,8 +60,17 @@ def add_to_team_and_org(team_name, username, org)
 
   # Add username to team_id
   # Slightly different than adding them as a member.
-  @client.add_team_membership(team_id, username)
-  puts "#{username} added to #{team_name}."
+  # If the username includes ","s, split it because it's a full list!
+  # TODO: break this out into it's own method detected early on?
+  if username.include?(",")
+    username.split(",").each do |name|
+      @client.add_team_membership(team_id, name)
+      puts "#{name} added to #{team_name}."
+    end
+  else
+    @client.add_team_membership(team_id, username)
+    puts "#{username} added to #{team_name}."
+  end
 end
 
 # Returns team_id
