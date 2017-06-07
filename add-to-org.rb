@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # add USERNAME as member to ORGANIZATION and optionally to TEAM
-# assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUB_TOKEN
+# assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUBUSER_TOKEN
 
 require 'octokit'
 require 'optparse'
@@ -33,6 +33,11 @@ OptionParser.new do |opts|
   end
 
 end.parse!
+
+
+TOKEN = ENV['GITHUBUSER_TOKEN']
+abort("Requires GITHUBUSER_TOKEN!") unless TOKEN
+
 
 # Assign variables
 #  Team is optional, so you don't need to assign it if it's nil.
