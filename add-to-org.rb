@@ -15,15 +15,15 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: add-to-org.rb [options]"
 
-  opts.on("-u", "--username USERNAME", "Username for membership -- ex: githubstudent") do |i|
+  opts.on("-u", "--username USERNAME", "Username for membership -- ex: githubstudent") do |u|
     options[:username] = u
   end
 
-  opts.on("-o", "--org ORGANIZATION", "Organization name -- ex: githubschool") do |r|
+  opts.on("-o", "--org ORGANIZATION", "Organization name -- ex: githubschool") do |o|
     options[:org] = o
   end
 
-  opts.on("-t", "--team TEAM_NAME", "Team to add member to -- ex: developers") do |i|
+  opts.on("-t", "--team TEAM_NAME", "[Optional] Team to add member to -- ex: developers") do |t|
     options[:team] = t
   end
 
