@@ -36,7 +36,9 @@ end.parse!
 
 
 TOKEN = ENV['GITHUBTEACHER_TOKEN']
-abort("\nMissing GITHUBUSER_TOKEN. Please set up an OAUTH token and set it in the environment by typing 'export GITHUBTEACHER_TOKEN=xxxxxxxxxxxxxxxx' (replacing with your actual token).\n\nReminder: This token needs admin privilages onto your organization in order to be inviting people.") unless TOKEN
+abort("Missing GITHUBUSER_TOKEN. Please set up an OAUTH token and set it in the environment by typing\n
+export GITHUBTEACHER_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX\n
+and replace the Xs with your actual token. Reminder: This token needs admin privilages onto your organization in order to be inviting people.") unless TOKEN
 
 # Assign variables
 #  Team is optional, so you don't need to assign it if it's nil.
