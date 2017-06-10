@@ -64,21 +64,29 @@ def add_to_team_and_org(team_name, username, org)
   # Slightly different than adding them as a member.
   # If the username includes ","s, split it because it's a full list!
   # TODO: break this out into it's own method detected early on?
-  if username.include?(",")
-    username.split(",").each do |name|
-      @client.add_team_membership(team_id, name)
-      puts "#{name} added to #{team_name}."
+  begin
+    if username.include?(",")
+      username.split(",").each do |name|
+        @client.add_team_membership(team_id, name)
+        puts "#{name} added to #{team_name}."
+      end
+    else
+      @client.add_team_membership(team_id, username)
+      puts "#{username} added to #{team_name}."
     end
-  else
-    @client.add_team_membership(team_id, username)
-    puts "#{username} added to #{team_name}."
+  rescue Octokit::Forbidden
+    abort "[403] - Unable to add member to organization. Check that the GITHUBTEACHER_TOKEN was created with administrative privilages so that you can add members to the organization"
   end
+
 end
 
 # Returns team_id
 def create_team(team_id, team_name, org)
-  # TODO: what ways can this fail that we need to rescue for?
-  response = @client.create_team(org, {:name => team_name})
+  begin
+    response = @client.create_team(org, {:name => team_name})
+  rescue Octokit::Forbidden
+    abort "[403] - Unable to add member to organization. Check that the GITHUBTEACHER_TOKEN was created with administrative privilages so that you can add members to the organization"
+  end
   team_id = response.id
   puts "Team '#{team_name}' created at https://github.com/orgs/#{org}/teams" unless team_id.nil?
 
@@ -100,7 +108,11 @@ end
 
 # If they just want to add users as members, skip the team
 def add_to_org(org, username)
-  @client.update_organization_membership(org, {:user => username})
+  begin
+    @client.update_organization_membership(org, {:user => username})
+  rescue Octokit::Forbidden
+    abort "[403] - Unable to add member to organization. Check that the GITHUBTEACHER_TOKEN was created with administrative privilages so that you can add members to the organization"
+  end
 end
 
 if !team_name.nil?
