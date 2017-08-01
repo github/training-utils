@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # add USERNAME as member to ORGANIZATION and optionally to TEAM
-# assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUBUSER_TOKEN
+# assumes you created and stored the appropriate OAuth token as an ENV variable called GITHUBTEACHER_TOKEN
 
 require 'octokit'
 require 'optparse'
@@ -13,7 +13,8 @@ options = {}
 
 # Parse options
 OptionParser.new do |opts|
-  opts.banner = "Usage: add-to-org.rb [options]"
+  opts.banner = "Usage: add-to-org.rb [options]
+       NOTICE: This also assumes you have set up the variable GITHUBTEACHER_TOKEN with administrative privilages.\n\n"
 
   opts.on("-u", "--username USERNAME", "Username for membership -- ex: githubstudent") do |u|
     options[:username] = u
@@ -36,7 +37,7 @@ end.parse!
 
 
 TOKEN = ENV['GITHUBTEACHER_TOKEN']
-abort("Missing GITHUBUSER_TOKEN. Please set up an OAUTH token and set it in the environment by typing\n
+abort("Missing GITHUBTEACHER_TOKEN. Please set up an OAUTH token and set it in the environment by typing\n
 export GITHUBTEACHER_TOKEN=XXXXXXXXXXXXXXXXXXXXXXX\n
 and replace the Xs with your actual token. Reminder: This token needs admin privilages onto your organization in order to be inviting people.") unless TOKEN
 
