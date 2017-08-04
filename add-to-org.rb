@@ -64,16 +64,10 @@ def add_to_team_and_org(team_name, username, org)
   # Add username to team_id
   # Slightly different than adding them as a member.
   # If the username includes ","s, split it because it's a full list!
-  # TODO: break this out into it's own method detected early on?
   begin
-    if username.include?(",")
-      username.split(",").each do |name|
-        @client.add_team_membership(team_id, name)
-        puts "#{name} added to #{team_name}."
-      end
-    else
-      @client.add_team_membership(team_id, username)
-      puts "#{username} added to #{team_name}."
+    username.split(",").each do |name|
+      @client.add_team_membership(team_id, name)
+      puts "#{name} added to #{team_name}."
     end
   rescue Octokit::Forbidden
     abort "[403] - Unable to add member to organization. Check that the GITHUBTEACHER_TOKEN was created with administrative privilages so that you can add members to the organization"
