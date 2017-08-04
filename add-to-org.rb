@@ -58,8 +58,11 @@ Octokit.auto_paginate = true
 #  regardless of them being a member of the organization yet
 def add_to_team_and_org(team_name, username, org)
 
-  team_id = get_team_id(team_name, org)
-  create_team(org, team_name, org) unless !team_id.nil?
+  team_id = if team_id.nil?
+    create_team(org, team_name, org)
+  else
+    get_team_id(team_name, org)
+  end
 
   # Add username to team_id
   # Slightly different than adding them as a member.
