@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem 'octokit'
+gem 'octokit', '~> 4.7'
