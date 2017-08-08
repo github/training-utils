@@ -98,7 +98,10 @@ end
 
 # If they just want to add users as members, skip the team
 def add_to_org(org, username)
-    @client.update_organization_membership(org, {:user => username})
+  username.split(",").each do |name|
+    @client.update_organization_membership(org, {:user => name})
+    puts "#{name} added to #{org}."
+  end
 end
 
 begin
