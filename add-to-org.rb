@@ -112,4 +112,6 @@ begin
   end
 rescue Octokit::Forbidden
   abort "[403] - Unable to add member to organization. Check that the GITHUBTEACHER_TOKEN was created with administrative privilages so that you can add members to the organization"
+rescue Octokit::Unauthorized
+  abort "[401] - The credentials you've supplied are no longer valid. Please generate a new token."
 end
